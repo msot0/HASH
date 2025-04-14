@@ -1,0 +1,90 @@
+name: Autograding Tests
+'on':
+  - push
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Sanity
+        id: sanity
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Sanity
+          setup-command: npm install
+          command: npm test sanity
+          timeout: 10
+          max-score: 10
+      - name: Binary
+        id: binary
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Binary
+          setup-command: npm install
+          command: npm test binary
+          timeout: 10
+          max-score: 10
+      - name: Char To-num
+        id: char-to-num
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Char To-num
+          setup-command: npm install
+          command: npm test charToNum
+          timeout: 10
+          max-score: 10
+      - name: Djb 2
+        id: djb-2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Djb 2
+          setup-command: npm install
+          command: npm test djb2
+          timeout: 10
+          max-score: 10
+      - name: Modulo
+        id: modulo
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Modulo
+          setup-command: npm install
+          command: npm test modulo
+          timeout: 10
+          max-score: 10
+      - name: Shift
+        id: shift
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Shift
+          setup-command: npm install
+          command: npm test shift
+          timeout: 10
+          max-score: 10
+      - name: Str To-num
+        id: str-to-num
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Str To-num
+          setup-command: npm install
+          command: npm test strToNum
+          timeout: 10
+          max-score: 10
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          SANITY_RESULTS: ${{steps.sanity.outputs.result}}
+          BINARY_RESULTS: ${{steps.binary.outputs.result}}
+          CHAR-TO-NUM_RESULTS: ${{steps.char-to-num.outputs.result}}
+          DJB-2_RESULTS: ${{steps.djb-2.outputs.result}}
+          MODULO_RESULTS: ${{steps.modulo.outputs.result}}
+          SHIFT_RESULTS: ${{steps.shift.outputs.result}}
+          STR-TO-NUM_RESULTS: ${{steps.str-to-num.outputs.result}}
+        with:
+          runners: sanity,binary,char-to-num,djb-2,modulo,shift,str-to-num

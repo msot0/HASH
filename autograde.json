@@ -1,0 +1,30 @@
+[
+  {
+    "testName": "sanity",
+    "points": 10
+  },
+  {
+    "testName": "binary",
+    "points": 10
+  },
+  {
+    "testName": "charToNum",
+    "points": 10
+  },
+  {
+    "testName": "djb2",
+    "points": 10
+  },
+  {
+    "testName": "modulo",
+    "points": 10
+  },
+  {
+    "testName": "shift",
+    "points": 10
+  },
+  {
+    "testName": "strToNum",
+    "points": 10
+  }
+]
