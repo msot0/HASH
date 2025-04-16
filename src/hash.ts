@@ -17,8 +17,7 @@ export const simpleModuloHash = (
   numerator: number,
   denominator: number
 ): number => {
-  // IMPLEMENT
-  return NaN;
+  return numerator % denominator;
 };
 
 /**
@@ -35,8 +34,7 @@ export const simpleModuloHash = (
  * For this function, all you need to do is return the character code at zero.
  */
 export const singleCharToNumber = (oneChar: string): number => {
-  // IMPLEMENT
-  return NaN;
+  return oneChar.charCodeAt(0);
 };
 
 /**
@@ -52,8 +50,11 @@ export const singleCharToNumber = (oneChar: string): number => {
  * string into a number.
  */
 export const stringToNumber = (str: string): number => {
-  // IMPLEMENT
-  return NaN;
+  let sum = 0;
+  for (const char of str) {
+    sum += singleCharToNumber(char);
+  }
+  return sum;
 };
 
 /**
@@ -85,8 +86,8 @@ export const stringToNumber = (str: string): number => {
  * for the win. You can also do this the hard way.
  */
 export const decimalToBinary = (num: number): string => {
-  // IMPLEMENT
-  return "";
+  
+  return num.toString(2); 
 };
 
 /**
@@ -119,8 +120,8 @@ export const shiftNumber = (
   amount: number,
   dir: "left" | "right"
 ): number => {
-  // IMPLEMENT
-  return NaN;
+  return dir === "left" ? num << amount : num >> amount;
+  
 };
 
 /**
@@ -144,7 +145,29 @@ export const shiftNumber = (
  * such.
  */
 export const djb2Hash = (str: string): number => {
-  // IMPLEMENT
+  let hash = 5381;
+  for (let i=0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+  }
+  return Math.abs(hash);
+};
+
+/* example hash function
+export const jenkins = (data: string): number => {
+  let i=0;
+  let hash = 0;
+  while (i!== data.length)  {
+    hash += data.charCodeAt[i++];
+    hash += hash << 10;;
+    hash ^= hash >> 6;
+  }
+    hash += hash << 3;
+    hash += hash >> 11;
+    hash ^= hash >> 15;
+    console.log(`Got ${data}, returning hash: ${hash}`);
+    // console.log("Got", data, "returning hash", hash);
+ return hash;
+}; */
 
   /*
     Pseudocode:
@@ -156,5 +179,5 @@ export const djb2Hash = (str: string): number => {
     return hash
   */
 
-  return NaN;
-};
+
+

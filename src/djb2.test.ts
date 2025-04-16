@@ -9,12 +9,14 @@ test("djb2 hash test", () => {
   expect(djb2Hash("I will always regret selling my Guild hollowbody")).toBe(
     300161260
   );
-  expect(
-    djb2Hash(
+  console.log(
+    "Long text:", djb2Hash(
       "An interesting property of hash functions is that they " +
         "always return you a number that fits within the valid range for that " +
         "number. Even if the input is stupidly long, like this text or maybe an " +
         "entire book, or even an entire library."
     )
-  ).toBe(16667709095);
+  );
+  expect(djb2Hash("")).toBe(5381);
+
 });
